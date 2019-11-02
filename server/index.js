@@ -15,9 +15,15 @@ passport.use(
 			// send the user to this route after the user has given permission
 			callbackURL: '/auth/google/callback'
 		},
+		// this callback is executed after OAuth callback was made
 		// profile is sent back as `accessToken`
-		accessToken => {
-			console.log(accessToken);
+		(accessToken, refreshToken, profile, done) => {
+			// accessToken: allows the app to read/write/delete on the user's behalf
+			console.log('access token:', accessToken);
+			// refreshToken: refreshes/updates the `accessToken` after it expires
+			console.log('refresh token:', refreshToken);
+			// the user's profile information
+			console.log('profile:', profile);
 		}
 	)
 );

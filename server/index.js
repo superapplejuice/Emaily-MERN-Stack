@@ -1,6 +1,11 @@
-// creates an express() application
 const express = require('express');
+const mongoose = require('mongoose');
+const keys = require('./config/keys');
+
+// creates an express() application
 const app = express();
+// connecting MongoDB with mongoose
+mongoose.connect(keys.mongoURI);
 
 // passport imports
 require('./services/passport');

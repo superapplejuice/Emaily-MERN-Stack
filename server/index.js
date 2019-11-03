@@ -7,6 +7,9 @@ const app = express();
 // connecting MongoDB with mongoose
 mongoose.connect(keys.mongoURI);
 
+// require mongoose models to load upon boot
+require('./models/User');
+
 // passport imports
 require('./services/passport');
 require('./routes/authRoutes')(app);

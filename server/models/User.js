@@ -12,3 +12,5 @@ const userSchema = new Schema({
 // 1st args: name of the model class
 // 2nd args: the schema that defines the model class
 mongoose.model('users', userSchema);
+// note: 2 arguments mean defining a new model class
+// note: 1 argument means calling a specific model class

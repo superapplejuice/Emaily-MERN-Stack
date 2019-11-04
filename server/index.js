@@ -1,17 +1,17 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const keys = require('./config/keys');
+// require mongoose models to load upon boot
+require('./models/User');
+require('./services/passport');
 
-// creates an express() application
-const app = express();
 // connecting MongoDB with mongoose
 mongoose.connect(keys.mongoURI);
 
-// require mongoose models to load upon boot
-require('./models/User');
+// creates an express() application
+const app = express();
 
-// passport imports
-require('./services/passport');
+// passport import
 require('./routes/authRoutes')(app);
 
 // dyanmic port binding: use PORT from .env or 5000

@@ -8,6 +8,21 @@ const keys = require('../config/keys');
 // here, we're calling a model class by defining only 1 argument: the name of the class we need
 const User = mongoose.model('users');
 
+// `user` is derived from the passport.use() callback (i.e. from existing/new user handling)
+// `done` is called together with the `user` argument (from passport)
+passport.serializeUser((user, done) => {
+	// user.id references `_id` from MongoDB
+	done(null, user.id);
+	console.log(user.id);
+});
+
+passport.deserializeUser((id, done) => {
+	// pass in the Id we want to find
+	// changes a user.id back into a user
+	User.findById(id).then(user => done(null, user));
+	console.log(id);
+});
+
 // tell passport to use GoogleStrategy as the authenticator and how to use it
 passport.use(
 	new GoogleStrategy(

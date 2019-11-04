@@ -13,14 +13,14 @@ const User = mongoose.model('users');
 passport.serializeUser((user, done) => {
 	// user.id references `_id` from MongoDB
 	done(null, user.id);
-	console.log(user.id);
+	// console.log('from serializeUser():', user.id);
 });
 
 passport.deserializeUser((id, done) => {
 	// pass in the Id we want to find
 	// changes a user.id back into a user
 	User.findById(id).then(user => done(null, user));
-	console.log(id);
+	// console.log('from deserializeUser():', id);
 });
 
 // tell passport to use GoogleStrategy as the authenticator and how to use it

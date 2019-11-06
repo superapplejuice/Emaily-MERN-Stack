@@ -1,5 +1,6 @@
 const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
+const FacebookStrategy = require('passport-facebook').Strategy;
 const mongoose = require('mongoose');
 const keys = require('../config/keys');
 
@@ -9,18 +10,31 @@ const keys = require('../config/keys');
 const User = mongoose.model('users');
 
 // `user` is derived from the passport.use() callback (i.e. from existing/new user handling)
-// `done` is called together with the `user` argument (from passport)
+// `done` is called together with the `user` argument (from Google)
+// `cb` is from Facebook
 passport.serializeUser((user, done) => {
 	// user.id references `_id` from MongoDB
 	done(null, user.id);
 	// console.log('from serializeUser():', user.id);
 });
 
+// `cb` is from facebook
+passport.serializeUser((user, cb) => {
+	cb(null, user.id);
+});
+
 passport.deserializeUser((id, done) => {
 	// pass in the Id we want to find
 	// changes a user.id back into a user
-	User.findById(id).then(user => done(null, user));
+	User.findById(id).then(user => {
+		done(null, user);
+	});
 	// console.log('from deserializeUser():', id);
+});
+
+// `cb` is from facebook
+passport.deserializeUser((id, cb) => {
+	cb(null, id);
 });
 
 // tell passport to use GoogleStrategy as the authenticator and how to use it
@@ -41,6 +55,7 @@ passport.use(
 
 			// mongoose queries are always asynchronous!!!
 			User.findOne({ googleId: profile.id }).then(existingUser => {
+				console.log(profile);
 				if (existingUser) {
 					// this user already exists
 					// 1st argument: tells passport if something went wrong
@@ -51,6 +66,33 @@ passport.use(
 					new User({ googleId: profile.id })
 						.save()
 						.then(newUser => done(null, newUser));
+				}
+			});
+		}
+	)
+);
+
+// tell passport to use FacebookStrategy as the authenticator and how to use it
+passport.use(
+	new FacebookStrategy(
+		{
+			clientID: keys.facebookAppID,
+			clientSecret: keys.facebookAppSecret,
+			// send the user to this route after the user has given permission
+			callbackURL: '/auth/facebook/callback'
+		},
+		// execute this callback after OAuth callback
+		(accessToken, refreshToken, profile, cb) => {
+			console.log(profile);
+			User.findOne({ facebookId: profile.id }).then(existingUser => {
+				if (existingUser) {
+					// user already exists
+					cb(null, existingUser);
+				} else {
+					// user does not exist, create new User instance
+					new User({ facebookId: profile.id })
+						.save()
+						.then(newUser => cb(null, newUser));
 				}
 			});
 		}

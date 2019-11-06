@@ -2,7 +2,7 @@ const passport = require('passport');
 
 module.exports = app => {
 	// adding passport as the second argument to the route handler instead of an arrow function
-	// sends user into the OAuth flow whenever the user enters this route
+	// sends user into the Google OAuth flow whenever the user enters this route
 	app.get(
 		'/auth/google',
 		passport.authenticate('google', {
@@ -11,10 +11,23 @@ module.exports = app => {
 		})
 	);
 
-	// route handler for OAuth callback
+	// route handler for Google OAuth callback
 	// uses the `code` returned from the authentication url to turn it into a profile
-	// profile is sent back as `accessToken` (console.log callback in `passport.use`)
+	// profile is sent back as `accessToken`
 	app.get('/auth/google/callback', passport.authenticate('google'));
+
+	// send user into Facebook OAuth flow at this route
+	app.get('/auth/facebook', passport.authenticate('facebook'));
+
+	// route handler for Facebook OAuth callback
+	app.get('/auth/facebook/callback', passport.authenticate('facebook'));
+
+	// gets access to the user who has completed OAuth flow and is logged in
+	// adds user model instance to `req.user`
+	// i.e. this returns the current user's id to this route
+	app.get('/api/current_user', (req, res) => {
+		res.send(req.user);
+	});
 };
 
 /*

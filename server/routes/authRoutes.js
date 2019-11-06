@@ -22,6 +22,16 @@ module.exports = app => {
 	// route handler for Facebook OAuth callback
 	app.get('/auth/facebook/callback', passport.authenticate('facebook'));
 
+	// logging out users
+	app.get('/api/logout', (req, res) => {
+		// logs out the current user
+		// destroys the Id within the current user's cookie
+		// user has no identifying token
+		req.logout();
+		// returns an empty page/undefined if the logout process is successful
+		res.send(req.user);
+	});
+
 	// gets access to the user who has completed OAuth flow and is logged in
 	// adds user model instance to `req.user`
 	// i.e. this returns the current user's id to this route

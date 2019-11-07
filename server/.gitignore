@@ -1,5 +1,4 @@
-/node_modules
-
-keys.js
+node_modules
+dev.js
 
 .DS_Store

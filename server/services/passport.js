@@ -44,7 +44,8 @@ passport.use(
 			clientID: keys.googleClientID,
 			clientSecret: keys.googleClientSecret,
 			// send the user to this route after the user has given permission
-			callbackURL: '/auth/google/callback'
+			callbackURL: '/auth/google/callback',
+			proxy: true
 		},
 		// this callback is executed after OAuth callback was made
 		// profile is sent back as `accessToken`
@@ -79,7 +80,8 @@ passport.use(
 			clientID: keys.facebookAppID,
 			clientSecret: keys.facebookAppSecret,
 			// send the user to this route after the user has given permission
-			callbackURL: '/auth/facebook/callback'
+			callbackURL: '/auth/facebook/callback',
+			proxy: true
 		},
 		// execute this callback after OAuth callback
 		(accessToken, refreshToken, profile, cb) => {

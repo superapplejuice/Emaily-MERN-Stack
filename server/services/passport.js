@@ -49,25 +49,25 @@ passport.use(
 		},
 		// this callback is executed after OAuth callback was made
 		// profile is sent back as `accessToken`
-		(accessToken, refreshToken, profile, done) => {
+		async (accessToken, refreshToken, profile, done) => {
 			// accessToken: allows the app to read/write/delete on the user's behalf
 			// refreshToken: refreshes/updates the `accessToken` after it expires
 			// done(): function from GoogleStrategy that is called when the authentication is complete
 
 			// mongoose queries are always asynchronous!!!
-			User.findOne({ googleId: profile.id }).then(existingUser => {
-				if (existingUser) {
-					// this user already exists
-					// 1st argument: tells passport if something went wrong
-					// 2nd argument: the User record
-					done(null, existingUser);
-				} else {
-					// this creates a new User instance and saves it (using `.save()`)
-					new User({ googleId: profile.id })
-						.save()
-						.then(newUser => done(null, newUser));
-				}
-			});
+			const existingUser = await User.findOne({ googleId: profile.id });
+
+			// check for user record in DB
+			if (existingUser) {
+				// this user already exists
+				// 1st argument: tells passport if something went wrong
+				// 2nd argument: the User record
+				return done(null, existingUser);
+			}
+
+			// this creates a new User instance and saves it (using `.save()`)
+			const newUser = await new User({ googleId: profile.id }).save();
+			done(null, newUser);
 		}
 	)
 );
@@ -83,18 +83,18 @@ passport.use(
 			proxy: true
 		},
 		// execute this callback after OAuth callback
-		(accessToken, refreshToken, profile, cb) => {
-			User.findOne({ facebookId: profile.id }).then(existingUser => {
-				if (existingUser) {
-					// user already exists
-					cb(null, existingUser);
-				} else {
-					// user does not exist, create new User instance
-					new User({ facebookId: profile.id })
-						.save()
-						.then(newUser => cb(null, newUser));
-				}
-			});
+		async (accessToken, refreshToken, profile, cb) => {
+			const existingUser = await User.findOne({ facebookId: profile.id });
+
+			// check for user record in DB
+			if (existingUser) {
+				// user already exists
+				return cb(null, existingUser);
+			}
+
+			// user does not exist, create new User instance
+			const newUser = await new User({ facebookId: profile.id }).save();
+			cb(null, newUser);
 		}
 	)
 );

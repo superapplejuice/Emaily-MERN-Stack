@@ -56,7 +56,6 @@ passport.use(
 
 			// mongoose queries are always asynchronous!!!
 			User.findOne({ googleId: profile.id }).then(existingUser => {
-				console.log(profile);
 				if (existingUser) {
 					// this user already exists
 					// 1st argument: tells passport if something went wrong
@@ -85,7 +84,6 @@ passport.use(
 		},
 		// execute this callback after OAuth callback
 		(accessToken, refreshToken, profile, cb) => {
-			console.log(profile);
 			User.findOne({ facebookId: profile.id }).then(existingUser => {
 				if (existingUser) {
 					// user already exists

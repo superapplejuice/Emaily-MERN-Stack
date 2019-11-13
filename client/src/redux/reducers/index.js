@@ -1,3 +1,3 @@
-import { combineReducers } from 'redux';
+import { combineReducers } from "redux";
 
-export default combineReducers(() => 'dummy');
+export default combineReducers(() => []);

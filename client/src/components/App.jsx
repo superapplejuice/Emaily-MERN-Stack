@@ -1,9 +1,9 @@
 import React from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 
-import Dashboard from "./Dashboard";
-import Header from "./Header";
-import Landing from "./Landing";
+import Dashboard from "./global/Dashboard";
+import Header from "./global/Header";
+import Landing from "./global/Landing";
 
 import SurveyNew from "./survey/SurveyNew";
 
@@ -20,12 +20,10 @@ const App = () => {
 
   const rootRender = () => {
     return (
-      <div>
-        <BrowserRouter>
-          <Header />
-          {routesHelper()}
-        </BrowserRouter>
-      </div>
+      <BrowserRouter>
+        <Header />
+        {routesHelper()}
+      </BrowserRouter>
     );
   };
 

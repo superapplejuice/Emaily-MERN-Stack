@@ -5,7 +5,6 @@ const Landing = () => {
   const renderComponents = () => {
     return (
       <div>
-        <Link to="/">Landing</Link>
         <Link to="/dashboard">Dashboard</Link>
         <Link to="/survey/new">New Survey</Link>
       </div>

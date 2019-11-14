@@ -22,7 +22,7 @@ const App = () => {
     return (
       <BrowserRouter>
         <Header />
-        {routesHelper()}
+        <div className="container">{routesHelper()}</div>
       </BrowserRouter>
     );
   };

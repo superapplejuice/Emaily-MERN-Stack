@@ -6,6 +6,8 @@ import store from "./redux/store";
 import App from "./components/App";
 import * as serviceWorker from "./serviceWorker";
 
+import "materialize-css/dist/css/materialize.min.css";
+
 const rootElement = document.getElementById("root");
 const rootRender = () => {
   return (

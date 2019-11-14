@@ -1,4 +1,4 @@
-import { SIGN_IN, SIGN_OUT } from "../actions/types";
+import { FETCH_USER_ACTION } from "../actions/types";
 
 const initialState = {
   isSignedIn: false
@@ -6,12 +6,6 @@ const initialState = {
 
 export default (state = initialState, { type, payload }) => {
   switch (type) {
-    case SIGN_IN:
-      return { ...state, isSignedIn: true, userId: payload };
-
-    case SIGN_OUT:
-      return { ...state, isSignedIn: false, userId: null };
-
     default:
       return state;
   }

@@ -1,5 +1,8 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
+import { connect } from "react-redux";
+
+import { fetchUserAction } from "../redux/actions";
 
 import Dashboard from "./global/Dashboard";
 import Header from "./global/Header";
@@ -7,7 +10,14 @@ import Landing from "./global/Landing";
 
 import SurveyNew from "./survey/SurveyNew";
 
-const App = () => {
+const App = props => {
+  const { fetchUserAction } = props;
+
+  useEffect(() => {
+    fetchUserAction();
+    // eslint-disable-next-line
+  }, []);
+
   const routesHelper = () => {
     return (
       <Switch>
@@ -30,4 +40,4 @@ const App = () => {
   return rootRender();
 };
 
-export default App;
+export default connect(undefined, { fetchUserAction })(App);

@@ -1,20 +1,12 @@
 import React from "react";
-import { Link } from "react-router-dom";
 
 const Landing = () => {
-  const renderComponents = () => {
-    return (
-      <div>
-        <Link to="/dashboard">Dashboard</Link>
-        <Link to="/survey/new">New Survey</Link>
-      </div>
-    );
-  };
+  const mainStyle = { textAlign: "center" };
 
   return (
-    <div>
-      Landing Page
-      {renderComponents()}
+    <div style={mainStyle}>
+      <h2>Emaily!</h2>
+      <div>Collect feedback from your users at the speed of light!</div>
     </div>
   );
 };

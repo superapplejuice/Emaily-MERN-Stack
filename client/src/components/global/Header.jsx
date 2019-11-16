@@ -30,7 +30,7 @@ const Header = ({ auth }) => {
   return (
     <nav>
       <div className="nav-wrapper">
-        <Link className="left brand-logo" to="/">
+        <Link className="left brand-logo" to={auth ? "/dashboard" : "/"}>
           Emaily
         </Link>
         <ul className="right">{loginStatus()}</ul>

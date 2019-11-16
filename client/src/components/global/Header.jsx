@@ -2,6 +2,8 @@ import React, { Fragment } from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 
+import Payments from "./Payments";
+
 const Header = ({ auth }) => {
   const credits = 0;
 
@@ -27,7 +29,7 @@ const Header = ({ auth }) => {
               <Link>Credits: {credits}</Link>
             </li>
             <li>
-              <Link>Add Credits</Link>
+              <Payments />
             </li>
             <li>
               <a href="/api/logout">Logout</a>

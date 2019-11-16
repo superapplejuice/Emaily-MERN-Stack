@@ -1,15 +1,15 @@
 import React from "react";
 import StripeCheckout from "react-stripe-checkout";
 
-const Payments = () => {
+const Checkout = ({ payment, amount }) => {
   return (
     <StripeCheckout
       name="Emaily"
-      description="5 credits"
-      label="Add Credits"
-      panelLabel="Pay"
+      description={`Add ${payment} credits to your account`}
+      // button name
+      label={`Add ${payment} Credits`}
       // cents
-      amount={500}
+      amount={amount}
       currency="USD"
       stripeKey={process.env.REACT_APP_STRIPE_KEY}
       // callback after successful payment
@@ -18,4 +18,4 @@ const Payments = () => {
   );
 };
 
-export default Payments;
+export default Checkout;

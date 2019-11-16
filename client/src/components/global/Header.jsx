@@ -2,8 +2,6 @@ import React, { Fragment } from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 
-import Payments from "./Payments";
-
 const Header = ({ auth }) => {
   const credits = 0;
 
@@ -11,6 +9,7 @@ const Header = ({ auth }) => {
     switch (auth) {
       case null:
         return;
+
       case false:
         return (
           <Fragment>
@@ -22,14 +21,15 @@ const Header = ({ auth }) => {
             </li>
           </Fragment>
         );
+
       default:
         return (
           <Fragment>
             <li>
-              <Link>Credits: {credits}</Link>
+              <div>Credits: {credits}</div>
             </li>
             <li>
-              <Payments />
+              <Link to="/add_credits">Add Credits</Link>
             </li>
             <li>
               <a href="/api/logout">Logout</a>

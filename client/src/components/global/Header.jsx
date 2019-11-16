@@ -11,17 +11,17 @@ const Header = ({ auth }) => {
         return (
           <Fragment>
             <li>
-              <Link to="/auth/google">Login with Google</Link>
+              <a href="/auth/google">Login with Google</a>
             </li>
             <li>
-              <Link to="/auth/facebook">Login with Facebook</Link>
+              <a href="/auth/facebook">Login with Facebook</a>
             </li>
           </Fragment>
         );
       default:
         return (
           <li>
-            <Link to="/api/logout">Logout</Link>
+            <a href="/api/logout">Logout</a>
           </li>
         );
     }

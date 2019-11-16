@@ -3,8 +3,10 @@ import React from "react";
 import Checkout from "./Checkout";
 
 const AddCredits = () => {
+  const mainStyle = { textAlign: "center" };
+
   return (
-    <div>
+    <div style={mainStyle}>
       <h4>Select payment:</h4>
       <Checkout payment={5} amount={499} />
       <Checkout payment={10} amount={949} />

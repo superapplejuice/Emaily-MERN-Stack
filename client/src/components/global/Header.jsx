@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 
 const Header = ({ auth }) => {
+  const credits = 0;
+
   const loginStatus = () => {
     switch (auth) {
       case null:
@@ -20,9 +22,17 @@ const Header = ({ auth }) => {
         );
       default:
         return (
-          <li>
-            <a href="/api/logout">Logout</a>
-          </li>
+          <Fragment>
+            <li>
+              <Link>Credits: {credits}</Link>
+            </li>
+            <li>
+              <Link>Add Credits</Link>
+            </li>
+            <li>
+              <a href="/api/logout">Logout</a>
+            </li>
+          </Fragment>
         );
     }
   };

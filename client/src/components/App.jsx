@@ -4,15 +4,13 @@ import { connect } from "react-redux";
 
 import { fetchUserAction } from "../redux/actions";
 
-import Dashboard from "./global/Dashboard";
-import Header from "./global/Header";
-import Landing from "./global/Landing";
+import Dashboard from "./main/Dashboard";
+import Header from "./main/Header";
+import Landing from "./main/Landing";
 import AddCredits from "./credits/AddCredits";
 import SurveyNew from "./survey/SurveyNew";
 
-const App = props => {
-  const { fetchUserAction } = props;
-
+const App = ({ fetchUserAction }) => {
   useEffect(() => {
     fetchUserAction();
     // eslint-disable-next-line

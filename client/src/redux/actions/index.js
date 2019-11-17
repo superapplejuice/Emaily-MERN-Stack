@@ -10,3 +10,14 @@ export const fetchUserAction = () => async dispatch => {
   // dispatch the action with the fetched user as the payload
   dispatch({ type: FETCH_USER_ACTION, payload: res.data });
 };
+
+// send the payment token to BE API
+export const handleTokenAction = token => async dispatch => {
+  // make a POST request to send the token to the BE
+  // the BE will confirm with Stripe that the payment was successful
+  const res = await axios.post("/api/stripe", token);
+
+  // the res contains the user with the updated amount of credits
+  // hence, dispatch the same action that updates the user
+  dispatch({ type: FETCH_USER_ACTION, payload: res.data });
+};

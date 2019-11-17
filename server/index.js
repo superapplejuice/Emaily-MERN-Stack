@@ -2,6 +2,9 @@ const express = require("express");
 const mongoose = require("mongoose");
 const cookieSession = require("cookie-session");
 const passport = require("passport");
+// express does not automatically parse POST requests
+// the bodyParser middleware parses POST requests as req.body
+const bodyParser = require("body-parser");
 
 // import private keys
 const keys = require("./config/keys");
@@ -16,6 +19,8 @@ mongoose.connect(keys.mongoURI);
 // creates an express() application
 const app = express();
 
+// use the bodyParser middleware to automatically parse POST requests
+app.use(bodyParser.json());
 // use cookies to store user's identifying token in the browser
 app.use(
   cookieSession({

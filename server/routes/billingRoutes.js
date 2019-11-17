@@ -19,15 +19,17 @@ module.exports = app => {
     switch (amount) {
       case 499:
         req.user.credits += 5;
+        break;
 
       case 949:
         req.user.credits += 10;
+        break;
 
       case 1799:
         req.user.credits += 20;
 
       default:
-        req.user.credits;
+        req.user.credits += 0;
     }
 
     // save and overwrite the current user's model with the updated one

@@ -16,7 +16,7 @@ const Checkout = props => {
       currency="USD"
       stripeKey={process.env.REACT_APP_STRIPE_KEY}
       // callback after successful payment
-      token={token => handleTokenAction(token)}
+      token={token => handleTokenAction({ token, amount })}
     >
       <button className="btn">{`Add ${payment} Credits`}</button>
     </StripeCheckout>

@@ -12,10 +12,10 @@ export const fetchUserAction = () => async dispatch => {
 };
 
 // send the payment token to BE API
-export const handleTokenAction = token => async dispatch => {
+export const handleTokenAction = creditDetails => async dispatch => {
   // make a POST request to send the token to the BE
   // the BE will confirm with Stripe that the payment was successful
-  const res = await axios.post("/api/stripe", token);
+  const res = await axios.post("/api/stripe", creditDetails);
 
   // the res contains the user with the updated amount of credits
   // hence, dispatch the same action that updates the user

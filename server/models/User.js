@@ -7,7 +7,7 @@ const { Schema } = mongoose;
 const userSchema = new Schema({
   googleId: String,
   facebookId: String,
-  credits: { type: Number, default: 0 }
+  credits: { type: Number, default: 1 }
 });
 
 // creating a model class

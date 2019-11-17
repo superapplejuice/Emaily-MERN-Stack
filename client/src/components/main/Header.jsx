@@ -3,8 +3,6 @@ import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 
 const Header = ({ auth }) => {
-  const credits = 0;
-
   const loginStatus = () => {
     switch (auth) {
       case null:
@@ -26,10 +24,7 @@ const Header = ({ auth }) => {
         return (
           <Fragment>
             <li>
-              <div>Credits: {credits}</div>
-            </li>
-            <li>
-              <Link to="/add_credits">Add Credits</Link>
+              <Link to="/add_credits">Credits: {auth.credits}</Link>
             </li>
             <li>
               <a href="/api/logout">Logout</a>
@@ -40,14 +35,16 @@ const Header = ({ auth }) => {
   };
 
   return (
-    <nav>
-      <div className="nav-wrapper">
-        <Link className="left brand-logo" to={auth ? "/dashboard" : "/"}>
-          Emaily
-        </Link>
-        <ul className="right">{loginStatus()}</ul>
-      </div>
-    </nav>
+    <div className="navbar-fixed">
+      <nav>
+        <div className="nav-wrapper">
+          <Link className="left brand-logo" to={auth ? "/dashboard" : "/"}>
+            Emaily
+          </Link>
+          <ul className="right">{loginStatus()}</ul>
+        </div>
+      </nav>
+    </div>
   );
 };
 

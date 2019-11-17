@@ -14,7 +14,11 @@ require("./models/User");
 require("./services/passport");
 
 // connecting MongoDB with mongoose
-mongoose.connect(keys.mongoURI);
+mongoose.connect(keys.mongoURI, {
+  // remove deprecation warnings
+  useNewUrlParser: true,
+  useUnifiedTopology: true
+});
 
 // creates an express() application
 const app = express();

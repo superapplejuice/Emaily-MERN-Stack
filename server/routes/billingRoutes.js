@@ -11,7 +11,7 @@ module.exports = app => {
       amount: amount,
       currency: "usd",
       source: token.id,
-      description: `Charge for ${token.email}`
+      description: `Charged ${amount} cents to ${token.email} for survey credits.`
     });
 
     console.log(charge);

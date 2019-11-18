@@ -1,4 +1,5 @@
 const passport = require("passport");
+const requireLogin = require("../middleware/requireLogin");
 
 module.exports = app => {
   // adding passport as the second argument to the route handler instead of an arrow function
@@ -33,7 +34,8 @@ module.exports = app => {
   );
 
   // logging out users
-  app.get("/api/logout", (req, res) => {
+  // ensure that the user is authenticated before they can access this route
+  app.get("/api/logout", requireLogin, (req, res) => {
     // logs out the current user
     // destroys the Id within the current user's cookie
     // user has no identifying token

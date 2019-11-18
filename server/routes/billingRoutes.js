@@ -1,16 +1,11 @@
 const { stripeSecretKey } = require("../config/keys");
 const stripe = require("stripe")(stripeSecretKey);
+const requireLogin = require("../middleware/requireLogin");
 
 module.exports = app => {
   // token goes here after user makes a payment
-  app.post("/api/stripe", async (req, res) => {
-    // ensure that the user is authenticated before they can access this route
-    if (!req.user) {
-      return res
-        .status(401)
-        .send({ error: "You must be logged in to do that!" });
-    }
-
+  // ensure that the user is authenticated before they can access this route
+  app.post("/api/stripe", requireLogin, async (req, res) => {
     const { amount, token } = req.body;
 
     // stripe methods return a promise

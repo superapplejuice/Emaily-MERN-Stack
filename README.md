@@ -1,3 +1,9 @@
 # Emaily MERN Stack
 
-Course by Stephen Grider on [Udemy](https://www.udemy.com/course/node-with-react-fullstack-web-development/).
+## Initial Setup
+
+Run `yarn boot` to install dependencies on the Client and Server.
+
+### Starting the App
+
+Run `yarn dev` to concurrently start the Client and Server.

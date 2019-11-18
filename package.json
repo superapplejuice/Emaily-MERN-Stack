@@ -1,16 +1,19 @@
 {
-	"name": "emaily_mern_stack",
-	"version": "1.0.0",
-	"main": "index.js",
-	"repository": "https://github.com/superapplejuice/Emaily-MERN-Stack.git",
-	"author": "Jan Mathew <janmathew@MacBookPro.local>",
-	"license": "MIT",
-	"dependencies": {
-		"concurrently": "^5.0.0"
-	},
-	"scripts": {
-		"server": "yarn --cwd ./server server",
-		"client": "yarn --cwd ./client start",
-		"dev": "concurrently \"yarn server\" \"yarn client\""
-	}
+  "name": "emaily_mern_stack",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/superapplejuice/Emaily-MERN-Stack.git",
+  "author": "Jan Mathew <janmathew@MacBookPro.local>",
+  "license": "MIT",
+  "dependencies": {
+    "concurrently": "^5.0.0"
+  },
+  "scripts": {
+    "instServer": "yarn --cwd ./server install",
+    "instClient": "yarn --cwd ./client install",
+    "boot": "concurrently \"yarn instServer\" \"yarn instClient\"",
+    "server": "yarn --cwd ./server server",
+    "client": "yarn --cwd ./client start",
+    "dev": "concurrently \"yarn server\" \"yarn client\""
+  }
 }

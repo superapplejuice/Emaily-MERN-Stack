@@ -4,6 +4,13 @@ const stripe = require("stripe")(stripeSecretKey);
 module.exports = app => {
   // token goes here after user makes a payment
   app.post("/api/stripe", async (req, res) => {
+    // ensure that the user is authenticated before they can access this route
+    if (!req.user) {
+      return res
+        .status(401)
+        .send({ error: "You must be logged in to do that!" });
+    }
+
     const { amount, token } = req.body;
 
     // stripe methods return a promise
@@ -14,8 +21,7 @@ module.exports = app => {
       description: `Charged ${amount} cents to ${token.email} for survey credits.`
     });
 
-    // `req.user` accesses the current user model
-    // initialized by passport
+    // `req.user` accesses the current user model (initialized by passport)
     switch (amount) {
       case 499:
         req.user.credits += 5;

@@ -38,7 +38,11 @@ const Header = ({ auth }) => {
     <div className="navbar-fixed">
       <nav>
         <div className="nav-wrapper">
-          <Link className="left brand-logo" to={auth ? "/dashboard" : "/"}>
+          <Link
+            className="left brand-logo"
+            to={auth ? "/dashboard" : "/"}
+            style={{ padding: "0 15px" }}
+          >
             Emaily
           </Link>
           <ul className="right">{loginStatus()}</ul>

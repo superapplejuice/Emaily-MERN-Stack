@@ -43,6 +43,20 @@ require("./routes/authRoutes")(app);
 // billing import
 require("./routes/billingRoutes")(app);
 
+// send routes to index.html if route does not exist in server/build
+// run only in production
+if (process.env.NODE_ENV === "production") {
+  const path = require("path");
+
+  // serve production assets e.g. main.js if route exists
+  app.use(express.static(path.resolve(__dirname, "../client/build")));
+
+  // serve index.html if route is not recognized
+  app.get("*", (req, res) => {
+    res.sendFile(path.resolve(__dirname, "../client/build", "index.html"));
+  });
+}
+
 // dyanmic port binding: use PORT from .env or 5000
 const PORT = process.env.PORT || 5000;
 // server listens to incoming traffic on port 5000

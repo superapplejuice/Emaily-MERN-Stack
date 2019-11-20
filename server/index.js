@@ -10,6 +10,7 @@ const bodyParser = require("body-parser");
 const keys = require("./config/keys");
 // require mongoose models to load upon boot
 require("./models/User");
+require("./models/Survey");
 // passport import
 require("./services/passport");
 

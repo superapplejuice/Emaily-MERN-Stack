@@ -2,6 +2,10 @@
   "name": "emaily_mern_stack",
   "version": "1.0.0",
   "main": "index.js",
+  "engines": {
+    "node": "10.16.3",
+    "yarn": "1.19.1"
+  },
   "repository": "https://github.com/superapplejuice/Emaily-MERN-Stack.git",
   "author": "Jan Mathew <janmathew@MacBookPro.local>",
   "license": "MIT",
@@ -9,11 +13,14 @@
     "concurrently": "^5.0.0"
   },
   "scripts": {
-    "instServer": "yarn --cwd ./server install",
-    "instClient": "yarn --cwd ./client install",
-    "boot": "concurrently \"yarn instServer\" \"yarn instClient\"",
-    "server": "yarn --cwd ./server server",
-    "client": "yarn --cwd ./client start",
-    "dev": "concurrently \"yarn server\" \"yarn client\""
+    "server-install": "yarn --cwd server install",
+    "client-install": "yarn --cwd client install",
+    "boot": "concurrently \"yarn server-install\" \"yarn client-install\"",
+    "server-start": "yarn --cwd server server",
+    "client-start": "yarn --cwd client start",
+    "dev": "concurrently \"yarn server-start\" \"yarn client-start\"",
+    "start": "node server",
+    "server": "nodemon server",
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false yarn --cwd client install && yarn --cwd client build"
   }
 }

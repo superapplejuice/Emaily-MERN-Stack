@@ -25,11 +25,10 @@
     "server-install": "yarn --cwd server install",
     "client-install": "yarn --cwd client install",
     "boot": "concurrently \"yarn server-install\" \"yarn client-install\"",
-    "server-start": "yarn --cwd server server",
-    "client-start": "yarn --cwd client start",
-    "dev": "concurrently \"yarn server-start\" \"yarn client-start\"",
     "start": "node server",
     "server": "nodemon server",
+    "client": "yarn --cwd client start",
+    "dev": "concurrently \"yarn server\" \"yarn client\"",
     "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false yarn --cwd client install && yarn --cwd client build"
   }
 }

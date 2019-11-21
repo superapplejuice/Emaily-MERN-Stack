@@ -39,10 +39,12 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 
-// passport import
+// passport routes import
 require("./routes/authRoutes")(app);
-// billing import
+// billing routes import
 require("./routes/billingRoutes")(app);
+// survey routes import
+require("./routes/surveyRoutes")(app);
 
 // send routes to index.html if route does not exist in server/build
 // run only in production

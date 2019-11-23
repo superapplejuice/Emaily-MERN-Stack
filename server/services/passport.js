@@ -1,13 +1,18 @@
 const passport = require("passport");
 const GoogleStrategy = require("passport-google-oauth20").Strategy;
 const FacebookStrategy = require("passport-facebook").Strategy;
-const mongoose = require("mongoose");
-const keys = require("../config/keys");
+const { model } = require("mongoose");
+const {
+  googleClientID,
+  googleClientSecret,
+  facebookAppID,
+  facebookAppSecret
+} = require("../config/keys");
 
 // note: 2 arguments mean defining a new model class
 // note: 1 argument means calling a specific model class
 // here, we're calling a model class by defining only 1 argument: the name of the class we need
-const User = mongoose.model("users");
+const User = model("users");
 
 // `user` is derived from the passport.use() callback (i.e. from existing/new user handling)
 // `done` is called together with the `user` argument (from Google)
@@ -41,8 +46,8 @@ passport.deserializeUser((id, cb) => {
 passport.use(
   new GoogleStrategy(
     {
-      clientID: keys.googleClientID,
-      clientSecret: keys.googleClientSecret,
+      clientID: googleClientID,
+      clientSecret: googleClientSecret,
       // send the user to this route after the user has given permission
       callbackURL: "/auth/google/callback",
       proxy: true
@@ -76,8 +81,8 @@ passport.use(
 passport.use(
   new FacebookStrategy(
     {
-      clientID: keys.facebookAppID,
-      clientSecret: keys.facebookAppSecret,
+      clientID: facebookAppID,
+      clientSecret: facebookAppSecret,
       // send the user to this route after the user has given permission
       callbackURL: "/auth/facebook/callback",
       proxy: true

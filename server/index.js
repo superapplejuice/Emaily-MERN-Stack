@@ -1,5 +1,5 @@
 const express = require("express");
-const mongoose = require("mongoose");
+const { connect } = require("mongoose");
 const cookieSession = require("cookie-session");
 const passport = require("passport");
 // express does not automatically parse POST requests
@@ -15,7 +15,7 @@ require("./models/Survey");
 require("./services/passport");
 
 // connecting MongoDB with mongoose
-mongoose.connect(keys.mongoURI, {
+connect(keys.mongoURI, {
   // remove deprecation warnings
   useNewUrlParser: true,
   useUnifiedTopology: true

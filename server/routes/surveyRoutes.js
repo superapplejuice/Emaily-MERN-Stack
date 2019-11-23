@@ -1,11 +1,11 @@
-const mongoose = require("mongoose");
+const { model } = require("mongoose");
 const requireLogin = require("../middleware/requireLogin");
 const requireCredits = require("../middleware/requireCredits");
 const Mailer = require("../services/Mailer");
 const surveyTemplate = require("../services/template/surveyTemplate");
 
 // reference the Survey model
-const Survey = mongoose.model("surveys");
+const Survey = model("surveys");
 
 module.exports = app => {
   app.post("/api/surveys", requireLogin, requireCredits, (req, res) => {

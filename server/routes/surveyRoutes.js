@@ -1,6 +1,8 @@
 const mongoose = require("mongoose");
 const requireLogin = require("../middleware/requireLogin");
 const requireCredits = require("../middleware/requireCredits");
+const Mailer = require("../services/Mailer");
+const surveyTemplate = require("../services/template/surveyTemplate");
 
 // reference the Survey model
 const Survey = mongoose.model("surveys");
@@ -27,5 +29,10 @@ module.exports = app => {
       // assume the Survey is sent following the creation of the Survey itself
       dateSent: Date.now()
     });
+
+    // use the Mailer class to send an email
+    // creating a new instance of the Mailer class
+    // pass the new survey instance into the class and surveyTemplate
+    const mailer = new Mailer(survey, surveyTemplate(survey));
   });
 };

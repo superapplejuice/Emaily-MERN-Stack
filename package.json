@@ -23,7 +23,7 @@
     "stripe": "^7.13.0"
   },
   "scripts": {
-    "server-install": "yarn --cwd server install",
+    "server-install": "yarn install",
     "client-install": "yarn --cwd client install",
     "boot": "concurrently \"yarn server-install\" \"yarn client-install\"",
     "start": "node server",

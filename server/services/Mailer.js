@@ -1,5 +1,12 @@
 const sendgrid = require("sendgrid");
-const { Mail, Email, Content, TrackingSettings, ClickTracking } = sendgrid.mail;
+const {
+  Mail,
+  Email,
+  Content,
+  TrackingSettings,
+  ClickTracking,
+  Personalization
+} = sendgrid.mail;
 const { sendGridKey } = require("../config/keys");
 
 // the Mailer class is an extension of helper.Mail
@@ -18,16 +25,32 @@ class Mailer extends Mail {
     this.recipients = this.formatAddresses(recipients);
 
     // execute methods
+    // addContent() is from SendGrid
     this.addContent(this.body);
     this.addClickTracking();
     this.addRecipients();
   }
 
-  // return the email addresses in the recipeints array
+  // returns formatted email addresses in the recipeints array
   formatAddresses(recipients) {
     return recipients.map(({ email }) => {
       return new Email(email);
     });
+  }
+
+  // takes the formatted list of recipients from formatAddresses()
+  // register it with the actual email
+  // required by SendGrid
+  addRecipients() {
+    // define personalize object
+    const personalize = new Personalization();
+
+    // iterate over every recipient in this.recipeints
+    // add every recipeints to the personalize object
+    this.recipients.forEach(recipient => personalize.addTo(recipient));
+
+    // add the personalize object to Personalization
+    this.addPersonalization(personalize);
   }
 
   // track the users who clicked the links in the email

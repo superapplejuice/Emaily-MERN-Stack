@@ -18,6 +18,9 @@ class Mailer extends Mail {
 
     const { subject, recipients } = header;
 
+    // include SendGrid API key
+    this.sendGridApi = sendgrid(sendGridKey);
+
     // getting required info to send the email
     this.from_email = new Email("no-reply@emaily.com");
     this.subject = subject;
@@ -62,6 +65,21 @@ class Mailer extends Mail {
     trackingSettings.setClickTracking(clickTracking);
 
     this.addTrackingSettings(trackingSettings);
+  }
+
+  // send the actual email to SendGrid
+  async sendEmail() {
+    const request = this.sendGridApi.emptyRequest({
+      method: "POST",
+      path: "/v3/mail/send",
+      // converts all the email properties to JSON
+      body: this.toJSON()
+    });
+
+    // send the email to SendGrid
+    const response = this.sendGridApi.API(request);
+
+    return response;
   }
 }
 

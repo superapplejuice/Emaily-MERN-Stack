@@ -8,7 +8,7 @@ const surveyTemplate = require("../services/template/surveyTemplate");
 const Survey = model("surveys");
 
 module.exports = app => {
-  app.post("/api/surveys", requireLogin, requireCredits, (req, res) => {
+  app.post("/api/surveys", requireLogin, requireCredits, async (req, res) => {
     // req.body contains the properties of the incoming request
     // easier to define the data to receive from FE in the BE first
     const { title, subject, body, recipients } = req.body;
@@ -35,7 +35,25 @@ module.exports = app => {
     // pass the new survey instance into the class and surveyTemplate
     const mailer = new Mailer(survey, surveyTemplate(survey));
 
-    // send the actual email
-    mailer.sendEmail();
+    // error catching in case any of these steps break
+    try {
+      // send the actual email
+      await mailer.sendEmail();
+
+      // save the survey to DB after the emails are successfully sent
+      await survey.save();
+
+      // -1 credits from user for creating a survey
+      req.user.credits -= 1;
+
+      // save and overwrite the current user's model with the updated one
+      const User = await req.user.save();
+
+      // respond to the request with the updated user
+      res.send(User);
+    } catch (err) {
+      // send the actual error message
+      res.status(422).send(err);
+    }
   });
 };

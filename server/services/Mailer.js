@@ -77,7 +77,7 @@ class Mailer extends Mail {
     });
 
     // send the email to SendGrid
-    const response = this.sendGridApi.API(request);
+    const response = await this.sendGridApi.API(request);
 
     return response;
   }

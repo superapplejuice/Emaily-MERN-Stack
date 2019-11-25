@@ -67,7 +67,7 @@ class Mailer extends Mail {
     this.addTrackingSettings(trackingSettings);
   }
 
-  // send the actual email to SendGrid
+  // method to send the actual email to SendGrid
   async sendEmail() {
     const request = this.sendGridApi.emptyRequest({
       method: "POST",

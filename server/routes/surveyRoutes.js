@@ -34,5 +34,8 @@ module.exports = app => {
     // creating a new instance of the Mailer class
     // pass the new survey instance into the class and surveyTemplate
     const mailer = new Mailer(survey, surveyTemplate(survey));
+
+    // send the actual email
+    mailer.sendEmail();
   });
 };

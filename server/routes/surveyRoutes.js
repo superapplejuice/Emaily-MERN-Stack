@@ -8,6 +8,11 @@ const surveyTemplate = require("../services/template/surveyTemplate");
 const Survey = model("surveys");
 
 module.exports = app => {
+  // direct users here after clicking on a link in a survey
+  app.get("/api/surveys/thanks", (req, res) => {
+    res.send("Thanks for voting!");
+  });
+
   app.post("/api/surveys", requireLogin, requireCredits, async (req, res) => {
     // req.body contains the properties of the incoming request
     // easier to define the data to receive from FE in the BE first

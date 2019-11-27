@@ -21,7 +21,7 @@ const App = ({ fetchUserAction }) => {
       <Switch>
         <Route exact path="/" component={Landing} />
         <Route exact path="/dashboard" component={Dashboard} />
-        <Route path="/survey/new" component={SurveyNew} />
+        <Route path="/surveys/new" component={SurveyNew} />
         <Route path="/add_credits" component={AddCredits} />
       </Switch>
     );

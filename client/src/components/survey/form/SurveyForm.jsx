@@ -1,8 +1,7 @@
 import React, { Fragment } from "react";
-import { Formik, Form } from "formik";
+import { withFormik, Form } from "formik";
 import * as yup from "yup";
 
-import FormField from "./FormField";
 import {
   surveyTitle,
   subjectLine,
@@ -11,61 +10,60 @@ import {
   survey_title,
   subject_line,
   email_body,
-  recipient_list
+  recipient_list,
+  surveyForm
 } from "./types";
+import FormField from "./FormField";
 
-const SurveyForm = () => {
-  const initialValues = {
-    surveyTitle: "",
-    subjectLine: "",
-    emailBody: "",
-    recipientList: ""
-  };
+const SurveyForm = ({ isSubmitting, header }) => {
+  return (
+    <Fragment>
+      <h4>{header}</h4>
+      <Form>
+        <FormField name={surveyTitle} label={survey_title} />
+        <FormField name={subjectLine} label={subject_line} />
+        <FormField name={emailBody} label={email_body} />
+        <FormField name={recipientList} label={recipient_list} />
+        <button
+          className="btn waves-effect waves-light"
+          type="submit"
+          disabled={isSubmitting}
+        >
+          Submit
+          <i className="material-icons right">send</i>
+        </button>
+      </Form>
+    </Fragment>
+  );
+};
 
-  const surveySchema = yup.object().shape({
+const formEnhancer = withFormik({
+  validationSchema: yup.object().shape({
     surveyTitle: yup.string().required("Please enter a title"),
     subjectLine: yup.string().required("Please enter a subject line"),
     emailBody: yup.string().required("Please enter the body of the email"),
     recipientList: yup
       .string()
       .required(
-        "Please enter email addresses of recipients who will receive your survey"
+        "Please enter valid email addresses of the recipients who will receive your survey"
       )
-  });
+  }),
 
-  return (
-    <Fragment>
-      <h4>Create a new Survey</h4>
-      <Formik
-        initialValues={initialValues}
-        validationSchema={surveySchema}
-        onSubmit={(values, { setSubmitting }) => {
-          setSubmitting(true);
-          alert(JSON.stringify(values, null, 2));
-          setSubmitting(false);
-        }}
-      >
-        {({ isSubmitting }) => {
-          return (
-            <Form>
-              <FormField name={surveyTitle} label={survey_title} />
-              <FormField name={subjectLine} label={subject_line} />
-              <FormField name={emailBody} label={email_body} />
-              <FormField name={recipientList} label={recipient_list} />
-              <button
-                className="btn waves-effect waves-light"
-                type="submit"
-                disabled={isSubmitting}
-              >
-                Submit
-                <i className="material-icons right">send</i>
-              </button>
-            </Form>
-          );
-        }}
-      </Formik>
-    </Fragment>
-  );
-};
+  // initialValues
+  mapPropsToValues: () => ({
+    surveyTitle: "",
+    subjectLine: "",
+    emailBody: "",
+    recipientList: ""
+  }),
 
-export default SurveyForm;
+  handleSubmit: (values, { setSubmitting }) => {
+    setSubmitting(true);
+    console.log(values);
+    setSubmitting(false);
+  },
+
+  displayName: surveyForm
+});
+
+export default formEnhancer(SurveyForm);

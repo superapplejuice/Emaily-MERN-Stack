@@ -1,7 +1,9 @@
 import React from "react";
 
+import SurveyForm from "./form/SurveyForm";
+
 const SurveyNew = () => {
-  return <div>New Survey Form</div>;
+  return <SurveyForm />;
 };
 
 export default SurveyNew;

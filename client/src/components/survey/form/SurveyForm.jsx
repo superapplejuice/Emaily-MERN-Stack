@@ -3,6 +3,16 @@ import { Formik, Form } from "formik";
 import * as yup from "yup";
 
 import FormField from "./FormField";
+import {
+  surveyTitle,
+  subjectLine,
+  emailBody,
+  recipientList,
+  survey_title,
+  subject_line,
+  email_body,
+  recipient_list
+} from "./types";
 
 const SurveyForm = () => {
   const initialValues = {
@@ -34,10 +44,10 @@ const SurveyForm = () => {
         {({ isSubmitting }) => {
           return (
             <Form>
-              <FormField name="surveyTitle" label="Survey Title" />
-              <FormField name="subjectLine" label="Subject Line" />
-              <FormField name="emailBody" label="Email Body" />
-              <FormField name="recipientList" label="Recipient List" />
+              <FormField name={surveyTitle} label={survey_title} />
+              <FormField name={subjectLine} label={subject_line} />
+              <FormField name={emailBody} label={email_body} />
+              <FormField name={recipientList} label={recipient_list} />
               <button
                 className="btn waves-effect waves-light"
                 type="submit"

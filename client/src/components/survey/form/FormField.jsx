@@ -5,9 +5,10 @@ const FormField = ({ label, ...props }) => {
   const [field, { error, touched }] = useField(props);
   return (
     <Fragment>
-      <div>{label}</div>
+      <label>{label}</label>
       <input {...field} {...props} />
-      {error && touched && <div className="red-text">{error}</div>}
+      {error && touched && <label className="red-text">{error}</label>}
+      <br />
     </Fragment>
   );
 };

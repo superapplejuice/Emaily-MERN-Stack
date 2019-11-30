@@ -1,6 +1,6 @@
 import axios from "axios";
 
-import { FETCH_USER_ACTION } from "./types";
+import { FETCH_USER_ACTION, POST_SURVEY_ACTION } from "./types";
 
 // fetch the currently signed in user
 export const fetchUserAction = () => async dispatch => {
@@ -20,4 +20,11 @@ export const handleTokenAction = creditDetails => async dispatch => {
   // the res contains the user with the updated amount of credits
   // hence, dispatch the same action that updates the user
   dispatch({ type: FETCH_USER_ACTION, payload: res.data });
+};
+
+// send the survey to BE API
+export const postSurveyAction = values => async dispatch => {
+  const res = await axios.post("/api/surveys", values);
+
+  dispatch({ type: POST_SURVEY_ACTION, payload: res.data });
 };

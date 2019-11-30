@@ -39,7 +39,11 @@ const SurveyForm = () => {
       <Formik
         initialValues={initialValues}
         validationSchema={surveySchema}
-        onSubmit={values => console.log(values)}
+        onSubmit={(values, { setSubmitting }) => {
+          setSubmitting(true);
+          alert(JSON.stringify(values, null, 2));
+          setSubmitting(false);
+        }}
       >
         {({ isSubmitting }) => {
           return (

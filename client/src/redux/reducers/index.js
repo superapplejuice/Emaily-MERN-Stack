@@ -1,6 +1,6 @@
 import { combineReducers } from "redux";
 
 import auth from "./authReducer";
-import survey from "./surveyReducer";
+import form from "./formReducer";
 
-export default combineReducers({ auth, survey });
+export default combineReducers({ auth, form });

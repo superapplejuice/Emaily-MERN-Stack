@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 
 import { postSurveyAction } from "../../redux/actions";
 
-import SurveyForm from "./form/SurveyForm";
+import SurveyForm from "../form/SurveyForm";
 
 const SurveyNew = ({ postSurveyAction }) => {
   const header = "Create a new Survey";

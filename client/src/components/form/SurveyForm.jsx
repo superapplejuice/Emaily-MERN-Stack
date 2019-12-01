@@ -11,8 +11,8 @@ import {
   subject_line,
   email_body,
   recipient_list
-} from "./types";
-import FormField from "./FormField";
+} from "./form-utils/types";
+import FormField from "./form-utils/FormField";
 
 const SurveyForm = ({ header, formAction }) => {
   const initialValues = {

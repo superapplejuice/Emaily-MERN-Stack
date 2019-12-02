@@ -1,7 +1,7 @@
-const { redirectDomain } = require("../../config/keys");
+const { redirectDomain } = require('../../config/keys')
 
 module.exports = ({ body }) => {
-  const linkUrl = `${redirectDomain}/api/surveys/thanks`;
+  const linkUrl = `${redirectDomain}/api/surveys/thanks`
 
   return `
   <html>
@@ -17,5 +17,5 @@ module.exports = ({ body }) => {
       </div>
     </body>
   </html>
-  `;
-};
+  `
+}

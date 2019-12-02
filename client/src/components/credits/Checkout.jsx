@@ -8,18 +8,20 @@ const Checkout = props => {
   const { payment, amount, handleTokenAction } = props
 
   return (
-    <StripeCheckout
-      name='Emaily'
-      description={`Add ${payment} credits to your account.`}
-      // cents
-      amount={amount}
-      currency='USD'
-      stripeKey={process.env.REACT_APP_STRIPE_KEY}
-      // callback after successful payment
-      token={token => handleTokenAction({ token, amount })}
-    >
-      <button className='btn'>{`Add ${payment} Credits`}</button>
-    </StripeCheckout>
+    <div>
+      <StripeCheckout
+        name='Emaily'
+        description={`Add ${payment} credits to your account.`}
+        // cents
+        amount={amount}
+        currency='USD'
+        stripeKey={process.env.REACT_APP_STRIPE_KEY}
+        // callback after successful payment
+        token={token => handleTokenAction({ token, amount })}
+      >
+        <button className='btn'>{`Add ${payment} Credits`}</button>
+      </StripeCheckout>
+    </div>
   )
 }
 

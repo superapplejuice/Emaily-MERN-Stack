@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react'
+import React from 'react'
 import { Formik, Form } from 'formik'
 import * as yup from 'yup'
 import { connect } from 'react-redux'
@@ -36,7 +36,7 @@ const SurveyForm = ({ header, postSurveyAction }) => {
   const Recipients = 'Recipients'
 
   return (
-    <Fragment>
+    <div>
       <h4>{header}</h4>
       <Formik
         initialValues={initialValues}
@@ -66,7 +66,7 @@ const SurveyForm = ({ header, postSurveyAction }) => {
           )
         }}
       </Formik>
-    </Fragment>
+    </div>
   )
 }
 

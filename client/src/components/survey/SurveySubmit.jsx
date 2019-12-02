@@ -9,7 +9,7 @@ const SurveySubmit = () => {
   useEffect(() => {
     setTimeout(() => {
       history.push('/dashboard')
-    }, 3000)
+    }, 5 * 1000)
   }, [])
 
   return (

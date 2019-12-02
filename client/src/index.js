@@ -9,13 +9,11 @@ import * as serviceWorker from './serviceWorker'
 import 'materialize-css/dist/css/materialize.min.css'
 
 const rootElement = document.getElementById('root')
-const rootRender = () => {
-  return (
-    <Provider store={store}>
-      <App />
-    </Provider>
-  )
-}
+const rootRender = () => (
+  <Provider store={store}>
+    <App />
+  </Provider>
+)
 
 render(rootRender(), rootElement)
 

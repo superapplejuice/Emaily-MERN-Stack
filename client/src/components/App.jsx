@@ -16,25 +16,21 @@ const App = ({ fetchUserAction }) => {
     // eslint-disable-next-line
   }, [])
 
-  const routesHelper = () => {
-    return (
-      <Switch>
-        <Route exact path='/' component={Landing} />
-        <Route exact path='/dashboard' component={Dashboard} />
-        <Route path='/surveys/new' component={SurveyNew} />
-        <Route path='/add_credits' component={AddCredits} />
-      </Switch>
-    )
-  }
+  const routesHelper = () => (
+    <Switch>
+      <Route exact path='/' component={Landing} />
+      <Route exact path='/dashboard' component={Dashboard} />
+      <Route path='/surveys/new' component={SurveyNew} />
+      <Route path='/add_credits' component={AddCredits} />
+    </Switch>
+  )
 
-  const rootRender = () => {
-    return (
-      <BrowserRouter>
-        <Header />
-        <div className='container'>{routesHelper()}</div>
-      </BrowserRouter>
-    )
-  }
+  const rootRender = () => (
+    <BrowserRouter>
+      <Header />
+      <div className='container'>{routesHelper()}</div>
+    </BrowserRouter>
+  )
 
   return rootRender()
 }

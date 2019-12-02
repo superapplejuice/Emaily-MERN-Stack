@@ -2,6 +2,7 @@ import React, { Fragment } from 'react'
 import { Formik, Form } from 'formik'
 import * as yup from 'yup'
 
+import history from '../history'
 import FormField from './form-utils/FormField'
 
 const SurveyForm = ({
@@ -19,6 +20,7 @@ const SurveyForm = ({
       onSubmit={(values, { setSubmitting }) => {
         formAction(values)
         setSubmitting(false)
+        history.push('/surveys/submit')
       }}
     >
       {({ isSubmitting }) => {

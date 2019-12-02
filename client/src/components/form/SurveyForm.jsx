@@ -2,21 +2,12 @@ import React, { Fragment } from 'react'
 import { Formik, Form } from 'formik'
 import * as yup from 'yup'
 
-import {
-  surveyTitle,
-  subjectLine,
-  emailBody,
-  recipientList,
-  survey_title,
-  subject_line,
-  email_body,
-  recipient_list
-} from './form-utils/types'
 import FormField from './form-utils/FormField'
 
 const SurveyForm = ({
   initialValues,
   validationSchema,
+  fieldValues,
   header,
   formAction
 }) => (
@@ -31,6 +22,17 @@ const SurveyForm = ({
       }}
     >
       {({ isSubmitting }) => {
+        const {
+          surveyTitle,
+          subjectLine,
+          emailBody,
+          recipientList,
+          survey_title,
+          subject_line,
+          email_body,
+          recipient_list
+        } = fieldValues
+
         return (
           <Form>
             <FormField name={surveyTitle} label={survey_title} />

@@ -23,12 +23,27 @@ const SurveyNew = ({ postSurveyAction }) => {
         .required('Please enter email addresses to send your survey to')
     })
 
+  const fieldValues = {
+    // field names
+    surveyTitle: 'surveyTitle',
+    subjectLine: 'subjectLine',
+    emailBody: 'emailBody',
+    recipientList: 'recipientList',
+
+    // field labels
+    survey_title: 'Survey Title',
+    subject_line: 'Subject Line',
+    email_body: 'Email Body',
+    recipient_list: 'Recipient List'
+  }
+
   const header = 'Create a new Survey'
 
   return (
     <SurveyForm
       initialValues={initialValues}
       validationSchema={validationSchema}
+      fieldValues={fieldValues}
       header={header}
       formAction={postSurveyAction}
     />

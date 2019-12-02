@@ -1,9 +1,9 @@
-import React from "react";
+import React from 'react'
 
-import Checkout from "./Checkout";
+import Checkout from './Checkout'
 
 const AddCredits = () => {
-  const mainStyle = { textAlign: "center" };
+  const mainStyle = { textAlign: 'center' }
 
   return (
     <div style={mainStyle}>
@@ -12,7 +12,7 @@ const AddCredits = () => {
       <Checkout payment={10} amount={949} />
       <Checkout payment={20} amount={1799} />
     </div>
-  );
-};
+  )
+}
 
-export default AddCredits;
+export default AddCredits
